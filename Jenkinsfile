@@ -3,12 +3,13 @@ pipeline {
 
     environment {
         // PostgreSQL environment variables
-        DB_HOST = 'your_postgres_host'
+        DB_HOST = 'demo-postgress.c5su6s0e6hei.us-east-1.rds.amazonaws.com'
         DB_PORT = '5432' // default PostgreSQL port
-        DB_NAME = 'your_database_name'
-        DB_USER = 'your_db_user'
-        DB_PASSWORD = credentials('postgres_password') // Jenkins credential ID
-        PYTHON_ENV = '/path/to/python' // Path to Python interpreter or virtual environment
+        DB_NAME = 'demo-postgress'
+        DB_USER = 'postgress'
+        DB_PASSWORD = 'demopostgress'
+        //DB_PASSWORD = credentials('postgres_password') // Jenkins credential ID
+        //PYTHON_ENV = '/path/to/python' // Path to Python interpreter or virtual environment
         BRANCH = "develop"
     }
 
@@ -33,11 +34,11 @@ pipeline {
                     // Install dependencies from requirements.txt
                     // Assuming requirements.txt is in the root of the repo
                     sh '''
-                        $PYTHON_ENV -m pip install -r requirements.txt
-                        // python3 -m venv venv
-                        // . venv/bin/activate
-                        // pip install --upgrade pip
-                        // pip install -r requirements.txt
+                        //$PYTHON_ENV -m pip install -r requirements.txt
+                        python3 -m venv venv
+                        . venv/bin/activate
+                        pip install --upgrade pip
+                        //pip install -r requirements.txt
                     '''
                 }
             }
@@ -48,8 +49,9 @@ pipeline {
                 script {
                     // Run the Python script to update PostgreSQL
                     sh '''
-                        //. venv/bin/activate
-                        $PYTHON_ENV python update_postgress_db.py --db-user ${DB_USER} --db-pass ${DB_PASSWORD} --db-host ${DB_HOST} --db-name ${DB_NAME} --db-port ${DB_PORT}
+                        . venv/bin/activate
+                        python3 update_postgress_db.py --db-user ${DB_USER} --db-pass ${DB_PASSWORD} --db-host ${DB_HOST} --db-name ${DB_NAME} --db-port ${DB_PORT}
+                       // $PYTHON_ENV python update_postgress_db.py --db-user ${DB_USER} --db-pass ${DB_PASSWORD} --db-host ${DB_HOST} --db-name ${DB_NAME} --db-port ${DB_PORT}
                     '''
                 }
             }
