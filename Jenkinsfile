@@ -20,13 +20,13 @@ pipeline {
         //         git branch: '${BRANCH}', url: 'https://github.com/Mylavarap/Demo.git'
         //     }
         // }
-        stage('Clone Repo') {
-            steps {
-                // Checkout the repository from GitHub
-                sh 'rm -rf Demo'
-                sh 'git clone -b ${BRANCH} git@github.com:Mylavarap/Demo.git'
-            }
-        }
+        // stage('Clone Repo') {
+        //     steps {
+        //         // Checkout the repository from GitHub
+        //         sh 'rm -rf Demo'
+        //         sh 'git clone -b ${BRANCH} git@github.com:Mylavarap/Demo.git'
+        //     }
+        // }
 
         stage('Install Python Dependencies') {
             steps {
