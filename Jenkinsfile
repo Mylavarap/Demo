@@ -47,7 +47,6 @@ pipeline {
                 script {
                     // Run the Python script to update PostgreSQL
                     sh '''
-                        . venv/bin/activate
                         python3 update_postgress_db.py --db-user ${DB_USER} --db-pass ${DB_PASSWORD} --db-host ${DB_HOST} --db-name ${DB_NAME} --db-port ${DB_PORT}
                     '''
                 }
