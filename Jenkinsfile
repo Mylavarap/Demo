@@ -28,19 +28,19 @@ pipeline {
         //     }
         // }
 
-        stage('Install Python Dependencies') {
-            steps {
-                script {
-                    // Install dependencies from requirements.txt
-                    // Assuming requirements.txt is in the root of the repo
-                    sh '''
-                        python3 -m venv venv
-                        . venv/bin/activate
-                        pip install --upgrade pip
-                    '''
-                }
-            }
-        }
+        // stage('Install Python Dependencies') {
+        //     steps {
+        //         script {
+        //             // Install dependencies from requirements.txt
+        //             // Assuming requirements.txt is in the root of the repo
+        //             sh '''
+        //                 python3 -m venv venv
+        //                 . venv/bin/activate
+        //                 pip install --upgrade pip
+        //             '''
+        //         }
+        //     }
+        // }
 
         stage('Run Python Script') {
             steps {
