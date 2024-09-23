@@ -14,12 +14,14 @@ pipeline {
     }
 
     stages {
-        // stage('Checkout from GitHub') {
-        //     steps {
-        //         // Checkout the repository from GitHub
-        //         git branch: '${BRANCH}', url: 'https://github.com/Mylavarap/Demo.git'
-        //     }
-        // }
+        stage('Checkout from GitHub') {
+            steps {
+                // Checkout the repository from GitHub
+                git branch: '${BRANCH}',
+                    credentialsId: 'github-credentials'
+                    url: 'https://github.com/Mylavarap/Demo.git'
+            }
+        }
         // stage('Clone Repo') {
         //     steps {
         //         // Checkout the repository from GitHub
