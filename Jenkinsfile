@@ -34,11 +34,9 @@ pipeline {
                     // Install dependencies from requirements.txt
                     // Assuming requirements.txt is in the root of the repo
                     sh '''
-                        //$PYTHON_ENV -m pip install -r requirements.txt
                         python3 -m venv venv
                         . venv/bin/activate
                         pip install --upgrade pip
-                        //pip install -r requirements.txt
                     '''
                 }
             }
@@ -51,7 +49,6 @@ pipeline {
                     sh '''
                         . venv/bin/activate
                         python3 update_postgress_db.py --db-user ${DB_USER} --db-pass ${DB_PASSWORD} --db-host ${DB_HOST} --db-name ${DB_NAME} --db-port ${DB_PORT}
-                       // $PYTHON_ENV python update_postgress_db.py --db-user ${DB_USER} --db-pass ${DB_PASSWORD} --db-host ${DB_HOST} --db-name ${DB_NAME} --db-port ${DB_PORT}
                     '''
                 }
             }
@@ -59,10 +56,10 @@ pipeline {
     }
 
     post {
-        // always {
-        //     // Cleanup virtual environment
-        //     sh 'rm -rf venv'
-        // }
+        always {
+            // Cleanup virtual environment
+            sh 'rm -rf venv'
+        }
         success {
             echo 'Pipeline executed successfully. Python script ran, and the database was updated.'
         }
