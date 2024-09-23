@@ -17,9 +17,11 @@ pipeline {
         stage('Checkout from GitHub') {
             steps {
                 // Checkout the repository from GitHub
-                git branch: '${BRANCH}',
+                sh '''
+                    git branch: '${BRANCH}',
                     credentialsId: 'github-credentials'
                     url: 'https://github.com/Mylavarap/Demo.git'
+                '''
             }
         }
         // stage('Clone Repo') {
