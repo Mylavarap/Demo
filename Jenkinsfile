@@ -10,18 +10,28 @@ pipeline {
         DB_PASSWORD = 'demopostgress'
         //DB_PASSWORD = credentials('postgres_password') // Jenkins credential ID
         //PYTHON_ENV = '/path/to/python' // Path to Python interpreter or virtual environment
-        //BRANCH = "develop"
+        BRANCH = "develop"
     }
 
     stages {
         stage('Checkout from GitHub') {
             steps {
                 // Checkout the repository from GitHub
-                git branch: 'develop',
+                sh '''
+                    git branch: '${BRANCH}',
                     credentialsId: 'github-credentials',
                     url: 'https://github.com/Mylavarap/Demo.git'
+                '''
             }
         }
+        // stage('Checkout from GitHub') {
+        //     steps {
+        //         // Checkout the repository from GitHub
+        //         git branch: 'develop',
+        //             credentialsId: 'github-credentials',
+        //             url: 'https://github.com/Mylavarap/Demo.git'
+        //     }
+        // }
         // stage('Clone Repo') {
         //     steps {
         //         // Checkout the repository from GitHub
